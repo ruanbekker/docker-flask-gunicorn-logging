@@ -5,15 +5,14 @@ services:
     container_name: debug-app
     build: .
     ports:
-      - 18090:80
+      - 15090:80
     networks:
       - public
     restart: unless-stopped
     logging:
-      driver: loki
+      driver: "json-file"
       options:
-        loki-url: http://localhost:3100/loki/api/v1/push
-        loki-external-labels: job=dockerlogs
+        max-size: "1m"
 networks:
   public:
     name: public
